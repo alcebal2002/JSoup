@@ -119,9 +119,9 @@ public class JsoupTest {
 		print("Intial URL   : %s", initialURL);
 		print("Filter String: %s", filterString);
 		print("Start time   : %s",new Timestamp(startTime)); 
-		print("Stop time   : %s",new Timestamp(stopTime)); 
+		print("Stop time    : %s",new Timestamp(stopTime)); 
         print(StringUtils.repeat("*", 15+initialURL.length()));
-		print("Elapsed time: (%s - %s) ms - (%s hrs %s min %s secs)",stopTime,startTime,hours,minutes,seconds); 
+		print("Elapsed time: (%d) ms - (%s hrs %s min %s secs)",(stopTime-startTime),hours,minutes,seconds); 
 		print("Total Inspected URLs       : %d", totalInspected);
 		print("Total URLs matching filter : %d", totalFound);
         print(StringUtils.repeat("*", 15+initialURL.length()));
