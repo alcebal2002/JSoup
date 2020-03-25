@@ -30,7 +30,8 @@ public class JsoupTest {
         Elements links; 
         //Elements media;
         //Elements imports;
-        int totalInspected = 0;
+		int totalInspected = 0;
+		int totalInspectedPerLevel = 0;
         int totalFound = 0;
         
         startTime = System.currentTimeMillis(); 
@@ -48,17 +49,20 @@ public class JsoupTest {
 			//ArrayList<UrlComponent> arrayUrlComponents = new ArrayList<UrlComponent>();
 			ArrayList<String> newWorkingURLs = new ArrayList<String>();
 			
+			totalInspectedPerLevel = 1;
+			
 			for (String url : workingURLs) {
-				print("\n * Depth %d. Inspecting %s", i, url);
+				print("\n * Depth %d. (%d / %d) - Inspecting %s", i, totalInspectedPerLevel, workingURLs.size(), url);
+				totalInspectedPerLevel++;
 	    		try {
 	    			doc = Jsoup.connect(url).get();
 		    		links = doc.select("a[href]");
 		    		print(" * Found %d links", links.size());
 		    		print(" * Filtering by %s", filterString);
 //		    		arrayUrlComponents.add(new UrlComponent (url,links/*,media,imports*/));
-
+					
 		    		for (Element link : links) {
-		    			totalInspected++;
+						totalInspected++;
 						newWorkingURLs.add(link.attr("abs:href"));
 		    			if ((link.attr("abs:href")).toUpperCase().indexOf(filterString.toUpperCase()) > 0) {
 		    				totalFound++;
